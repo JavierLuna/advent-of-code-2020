@@ -28,8 +28,10 @@ class BaseSolution(metaclass=ABCMeta):
     def solve(self):
         def print_sol(part: int, solution):
             phrase = "⭐"*part
-            phrase += "\t\t" if isinstance(solution, int) else "\n"
-            phrase += f"{Color.BYELLOW}{solution}{Color.CLEAR}"
+            if isinstance(solution, int):
+                phrase += f"\t\t{Color.BYELLOW}{solution}{Color.CLEAR}"
+            else:
+                phrase += f"\n{Color.BOLD}{solution}{Color.CLEAR}\n"
             print(phrase)
 
         self._solutions["solve_first"] = self.solve_first()
