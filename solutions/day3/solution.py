@@ -5,14 +5,15 @@ from solutions.runner.base_solution import BaseSolution
 
 from solutions.runner.readers.base_reader import BaseReader
 
+TREE = "#"
+
 
 class Day3Reader(BaseReader):
-    TREE = "#"
 
     @staticmethod
     def transform_raw_line(line: str):
         line = line.strip()
-        return {i for i, c in enumerate(line) if c == Day3Reader.TREE}, len(line)
+        return line
 
 
 class Day3Solution(BaseSolution):
@@ -21,16 +22,16 @@ class Day3Solution(BaseSolution):
     def solve_first(self):
         return self._count_trees(self.input_data, 1, 3)
 
-    def _count_trees(self, input_data: Tuple[Set[int], int], down: int, right: int):
+    def _count_trees(self, input_data: str, down: int, right: int):
         tree_count = 0
         x_position = 0
-        for i, (tree_positions, line_length) in enumerate(input_data):
+        for i, line in enumerate(input_data):
             if i % down != 0:
                 continue
-            if x_position in tree_positions:
+            if line[x_position] == TREE:
                 tree_count += 1
             x_position += right
-            x_position = x_position % line_length
+            x_position = x_position % len(line)
         return tree_count
 
     def solve_second(self):
