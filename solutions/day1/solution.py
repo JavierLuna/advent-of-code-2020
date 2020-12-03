@@ -17,7 +17,6 @@ class Day1Solution(BaseSolution):
         for number in numbers:
             required_number = target - number
             if required_number in numbers:
-                print(f"Numbers can be {number} and {required_number} which ammount to: {number * required_number}")
                 result = (number, required_number)
                 if required_number != number:
                     break
