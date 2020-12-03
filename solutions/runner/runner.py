@@ -2,6 +2,7 @@ import importlib
 import os
 
 from solutions.runner.base_solution import BaseSolution
+from solutions.runner.formatting import Color
 
 
 class SolutionRunner:
@@ -20,9 +21,7 @@ class SolutionRunner:
                                     isinstance(member, type) and member != BaseSolution and issubclass(member,
                                                                                                        BaseSolution)]
 
-        print("=" * 40)
-        print(f"Running solutions for {day}: \n")
+        print(f"\n\t\t🎄⭐ {Color.BGREEN}~{day.capitalize()}~{Color.CLEAR} ⭐🎄 \n")
         for solution in possible_solution_solver:
             solution = solution()
             solution.solve()
-        print("=" * 40, "\n\n")
