@@ -24,10 +24,11 @@ class BaseSolution(metaclass=ABCMeta):
             "solve_first": None,
             "solve_second": None
         }
+        self.bag = {}
 
     def solve(self):
         def print_sol(part: int, solution):
-            phrase = "⭐"*part
+            phrase = "⭐" * part
             if isinstance(solution, int):
                 phrase += f"\t\t{Color.BYELLOW}{solution}{Color.CLEAR}"
             else:

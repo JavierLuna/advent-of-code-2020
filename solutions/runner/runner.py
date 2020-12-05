@@ -10,7 +10,7 @@ class SolutionRunner:
     def run_all(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         all_solutions = sorted([directory for directory in next(os.walk(os.path.dirname(dir_path)))[1] if
-                         directory.startswith("day")], key=lambda day: int(day[3:]))
+                                directory.startswith("day")], key=lambda day: int(day[3:]))
         print(f"Solutions found for the following days: {', '.join(all_solutions)}\n")
         for solution in all_solutions:
             self.run_solution(solution)
@@ -25,3 +25,4 @@ class SolutionRunner:
         for solution in possible_solution_solver:
             solution = solution()
             solution.solve()
+            del solution
