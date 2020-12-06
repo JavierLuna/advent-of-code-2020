@@ -3,9 +3,10 @@ import re
 
 from solutions.runner.base_solution import BaseSolution
 from solutions.runner.readers.base_reader import BaseReader
+from solutions.runner.readers.groups import DictionaryGroupReader
 
 
-class PassportReader(BaseReader):
+class PassportReader(DictionaryGroupReader):
 
     @staticmethod
     def transform_raw_line(line: str):
@@ -13,18 +14,6 @@ class PassportReader(BaseReader):
         if line:
             pairs = line.split(" ")
             return dict([pair.split(":") for pair in pairs])
-        return None
-
-    def read_input_data(self, filename: str):
-        # Group them dictionaries together
-        pairs = self._read_lines(filename, omit_empty=False)
-        final_input_data = [{}]
-        for pair in pairs:
-            if pair is not None:
-                final_input_data[-1].update(pair)
-            else:
-                final_input_data.append({})
-        return final_input_data
 
 
 class Day4Solution(BaseSolution):
@@ -56,9 +45,9 @@ class Day4Solution(BaseSolution):
                 return False
             value, unit = int(x[:-2]), x[-2:]
             if unit == "cm":
-                return 150 <= value <= 193
+                return _between(150, 193)(value)
             if unit == "in":
-                return 59 <= value <= 76
+                return _between(59, 76)(value)
             return False
 
         required_fields: Dict[str, Callable[[str], bool]] = {

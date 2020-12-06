@@ -1,22 +1,15 @@
+import functools
 from typing import Set, List, Callable
 
 from solutions.runner.base_solution import BaseSolution
-from solutions.runner.readers.base_reader import BaseReader
-import functools
+
+from solutions.runner.readers.groups import ListGroupReader
 
 
-class Day6Reader(BaseReader):
-    def read_input_data(self, filename: str):
-        # Group them dictionaries together
-        groups = self._read_lines(filename, omit_empty=False)
-        final_input_data = [[]]
-        for group in groups:
-            group = group.strip()
-            if group:
-                final_input_data[-1].append(set(group))
-            else:
-                final_input_data.append([])
-        return final_input_data
+class Day6Reader(ListGroupReader):  # 6583, 3290
+    @staticmethod
+    def transform_raw_line(line: str):
+        return set(line.strip())
 
 
 class Day6Solution(BaseSolution):
