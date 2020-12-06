@@ -28,3 +28,19 @@ class BaseReader(metaclass=ABCMeta):
 
     def read_input_data(self, filename: str) -> Any:
         return self._read_lines(filename)
+
+
+class BaseGroupReader(BaseReader):
+    __group_metadata__ = list, list.append
+
+    def read_input_data(self, filename: str):
+        structure, add_op = self.__group_metadata__
+        # Group them dictionaries together
+        transformed_lines = self._read_lines(filename, omit_empty=False)
+        final_input_data = [structure()]
+        for transformed_line in transformed_lines:
+            if transformed_line:
+                add_op(final_input_data[-1], transformed_line)
+            else:
+                final_input_data.append(structure())
+        return final_input_data
