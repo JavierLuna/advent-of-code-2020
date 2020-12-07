@@ -43,7 +43,7 @@ class Day7Solution(BaseSolution):
             for neighbor in neighbors:
                 if neighbor == target or neighbor in known_conclusive_nodes:
                     conclusive_paths.append(path + [neighbor])
-                    known_conclusive_nodes.add(neighbor)
+                    [known_conclusive_nodes.add(node) for node in conclusive_paths[-1]]
                 else:
                     paths_to_expand.append(path + [neighbor])
         return conclusive_paths
