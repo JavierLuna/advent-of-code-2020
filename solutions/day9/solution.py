@@ -52,7 +52,7 @@ class Day9Solution(BaseSolution):
                 return True, input_data[0], contagious_highest
             if contagious_sum > target:
                 break
-        return False, 0, 0
+        return False, input_data[0], contagious_highest
 
     def solve_second(self):
         target = self._solutions["solve_first"]
