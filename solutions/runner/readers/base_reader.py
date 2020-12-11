@@ -16,7 +16,7 @@ class BaseReader(metaclass=ABCMeta):
             return self._content_cache[filename]
 
         with open(filename) as file:
-            input_data = [self.transform_raw_line(line) for line in file if not (omit_empty and not line.strip())]
+            input_data = [self.transform_raw_line(line.strip()) for line in file if not (omit_empty and not line.strip())]
 
         if use_cache:
             self._content_cache[filename] = input_data
