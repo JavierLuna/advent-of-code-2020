@@ -1,8 +1,7 @@
 import os
 
-INPUTS_FOLDER = os.getenv("INPUTS_FOLDER")
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
-if not INPUTS_FOLDER:
-    import os
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    INPUTS_FOLDER = os.path.join(os.path.dirname(os.path.dirname(dir_path)), "inputs")
+ROOT_FOLDER = os.path.dirname(os.path.dirname(dir_path))
+INPUTS_FOLDER = os.path.join(ROOT_FOLDER, "inputs")
+SOLUTIONS_FOLDER = os.path.join(ROOT_FOLDER, "solutions")

@@ -5,7 +5,7 @@ from abc import ABCMeta, abstractmethod
 from typing import Dict
 
 from solutions.runner.config import INPUTS_FOLDER
-from solutions.runner.formatting import Color
+from solutions.runner.formatting import Color, print_sol
 from solutions.runner.readers.numeric import IntListReader
 
 
@@ -26,19 +26,12 @@ class BaseSolution(metaclass=ABCMeta):
         }
         self.bag = {}
 
-    def solve(self):
-        def print_sol(part: int, solution):
-            phrase = "⭐" * part
-            if isinstance(solution, int):
-                phrase += f"\t\t{Color.BYELLOW}{solution}{Color.CLEAR}"
-            else:
-                phrase += f"\n{Color.BOLD}{solution}{Color.CLEAR}\n"
-            print(phrase)
-
+    def solve(self) -> tuple:
         self._solutions["solve_first"] = self.solve_first()
         print_sol(1, self._solutions["solve_first"])
         self._solutions["solve_second"] = self.solve_second()
         print_sol(2, self._solutions["solve_second"])
+        return self._solutions["solve_first"], self._solutions["solve_second"]
 
     @abstractmethod
     def solve_first(self):
